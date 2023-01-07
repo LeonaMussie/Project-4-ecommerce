@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>E-commerce website</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+	</script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="{% url 'store' %}">London Loox</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
+	      </li>
+		  <li class="nav-item active">
+			<a class="nav-link" href="{% url 'home' %}">About<span class="sr-only">(current)</span></a>
+		  </li>
+		  <li class="nav-item active">
+			<a class="nav-link" href="{% url 'register' %}">register<span class="sr-only">(current)</span></a>
+		  </li>
+	 
+	    </ul>
+	    <div class="form-inline my-2 my-lg-0">
+			{% if user.is_authenticated %}
+			 <p class="text-white">Hello {{user.username }}!</p>
+			<p><a  class="btn btn-warning" href="{% url 'logout' %}">Log Out</a></p>
+		  {% else %}
+			<p><a class="btn btn-warning" href="{% url 'login' %}">Log In</a></p>
+		  {% endif %}
+	     	
+	     	<a href="{% url 'cart' %}">
+	    		<img  id="cart-icon" src="{% static 'images/cart.png' %}">
+	    	</a>
+	    	<p id="cart-total">{{cartItems}}</p>
+
+	    </div>
+	  </div>
+	</nav>
+
+     <div class="container">
+            <br>
+            {% block content %}
+
+
+            {% endblock content %}
+         </div>
+
+	 <footer class = "container-fluid bg-dark py-3" id="footer">
+			<div class = "bg-black py-3">
+				<div class = "row text-white g-4">
+					<div class = "col-md-6 col-lg-3">
+						<a class = "text-uppercase text-decoration-none brand text-white"  href="{% url 'store' %}">London Loox</a>
+						<p class = "text-white  mt-3">Powered by nature, our line of hair care products was formulated to nourish, replenish, and strengthen your locks for confidence from the crown down.</p>
+					</div>
+		
+					<div class = "col-md-6 col-lg-3">
+						<h5 class = "fw-light">Links</h5>
+						<ul class = "list-unstyled">
+							<li class = >
+								<a class = "text-white text-decoration-none " href="{% url 'store' %}">
+									Store
+								</a>
+							</li>
+							<li class = "my-3">
+								<a class = "text-white text-decoration-none " href="{% url 'home' %}">
+									About
+								</a>
+							</li>
+						</ul>
+					</div>
+		
+					<div class = "col-md-6 col-lg-3">
+						<h5 class = "fw-light mb-3">Contact Us</h5>
+						<div class = "d-flex justify-content-start align-items-start my-2 ">
+							<span class = "me-3">
+								<i class = "fas fa-map-marked-alt"></i>
+							</span>
+							<span class = "fw-light">
+								CHELMSFORD, ESSEX.
+							</span>
+						</div>
+						<div class = "d-flex justify-content-start align-items-start my-2 ">
+							<span class = "me-3">
+								<i class = "fas fa-envelope"></i>
+							</span>
+							<div class = "fw-light">
+							  merih84@outlook.com
+							</div>
+						</div>
+						<div class = "d-flex justify-content-start align-items-start my-2 ">
+							<span class = "me-3">
+								<i class = "fas fa-phone-alt"></i>
+							</span>
+							<div class = "fw-light">
+								+447944673624
+							</div>
+						</div>
+					</div>
+		
+					<div class = "col-md-6 col-lg-3">
+						<h5 class = "fw-light mb-3">Follow Us</h5>
+						<div>
+							<ul class = "list-unstyled d-flex">
+								<li>
+									<a href = "https://www.facebook.com/mary.tesfamariam"  target="blank" class = "text-white text-decoration-none  fs-4 me-4">
+										<i class = "fab fa-facebook-f"></i>
+									</a>
+								</li>
+								<li>
+									<a href = "https://www.instagram.com/londonloox/" target="blank" class = "text-white text-decoration-none  fs-4 me-4">
+										<i class = "fab fa-instagram"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>	 
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>
