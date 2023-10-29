@@ -15,8 +15,6 @@ Londonloox is an e-commerce website that offers a seamless shopping experience f
 - [Website Features](#website-features)
 - [Local Usage](#local-usage)
 - [Deployment on PythonAnywhere](#deployment-on-pythonanywhere)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Technologies
 Londonloox is built using the following technologies:
