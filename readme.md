@@ -67,10 +67,21 @@ To run Londonloox locally, follow these steps:
 
 Londonloox can be deployed on PythonAnywhere, a popular platform for hosting Python web applications. Follow these steps to deploy your Londonloox project:
 
-1. **Sign up for a PythonAnywhere account** (if you don't have one).
+1. Sign up for a PythonAnywhere account (if you don't have one).
 
-2. **Create a new web app on PythonAnywhere.**
+2. Create a new web app on PythonAnywhere.
   
-3. **Set up a virtual environment on PythonAnywhere (similar to the local usage steps).**
+3. Set up a virtual environment on PythonAnywhere (similar to the local usage steps).
 
-4. **Upload your Londonloox project files to your PythonAnywhere account.**
+4. Upload your Londonloox project files to your PythonAnywhere account.
+
+5. Install the project dependencies.
+
+6. Apply the database migrations.
+
+7. Configure your PythonAnywhere web app to use the WSGI file from your Londonloox project.
+
+8. Reload your web app, and it should be live at the provided URL.
+   
+***
+Created By: Leona Mussie<br/>
