@@ -1,8 +1,14 @@
 # Londonloox E-Commerce Website
 
-![Londonloox Logo](link-to-your-logo-image)
-
 Londonloox is an e-commerce website that offers a seamless shopping experience for both registered users and guests. Our goal is to make online shopping easy and secure, providing a wide range of products for your convenience.
+
+[Live App](https://leona05.pythonanywhere.com/)
+
+![Screenshot (78)](https://github.com/LeonaMussie/Project-4-ecommerce/assets/91215248/5d0e46ab-84e4-4bd1-ac92-f9a9da9a3c33)
+![Screenshot (79)](https://github.com/LeonaMussie/Project-4-ecommerce/assets/91215248/8cc71343-7641-4f47-b087-32f55f7a969e)
+![Screenshot (80)](https://github.com/LeonaMussie/Project-4-ecommerce/assets/91215248/580bf1c2-094b-451b-b1d4-a41cb1b73183)
+![Screenshot (82)](https://github.com/LeonaMussie/Project-4-ecommerce/assets/91215248/b0cbc676-e082-4305-a5d0-0200680ff203)
+
 
 ## Table of Contents
 - [Technologies](#technologies)
